@@ -1,0 +1,22 @@
+---
+- name: Creaitng groups
+  group:
+   name: cloudadmins
+   gid: 3000
+   state: present
+
+- name: Creating users
+  user:
+   name: "{{ item.name }}"
+   uid: "{{ item.id }}"
+   state: present
+   groups: cloudadmins,wheel
+   generate_ssh_key: yes
+  loop: "{{ userlist }}"
+
+- name: Authorize key set up
+  authorized_key:
+   user: "{{ item.name }}"
+   state: present
+   key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  loop: "{{ userlist }}"

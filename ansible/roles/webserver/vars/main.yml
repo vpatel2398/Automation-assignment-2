@@ -1,0 +1,5 @@
+files:
+ - path: ./files/vm1.html
+   hostname: n01529156linux1
+ - path: ./files/vm2.html
+   hostname: n01529156linux2
